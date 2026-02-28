@@ -15,16 +15,16 @@
   </head>
   <body class="bg-[#F8FAFC]">
     <header>
-      <section class="max-w-[1110px] mx-auto space-y-5 mt-14">
-        <h1 class="text-3xl text-[#002C5C] font-bold">
+      <section class="max-w-[350px] sm:max-w-[1110px] mx-auto space-y-5 mt-14 ">
+        <h1 class="text-3xl text-[#002C5C] font-bold ">
           Job Application Tracker
         </h1>
-        <div class="flex gap-5 spy">
+        <div class="grid grid-cols-1  sm:grid-cols-3 gap-5 ">
           <div
             class="bg-white rounded-lg p-3 w-[360px] border border-[#f1f2f4FF]"
           >
             <p class="text-sm text-[#323b49FF] font-medium space-y-2">Total</p>
-            <p class="text-2xl font-bold text-[#002c5cFF]">0</p>
+            <p id="total-all" class="text-2xl font-bold text-[#002c5cFF]">0</p>
           </div>
           <div
             class="bg-white rounded-lg p-3 w-[360px] border border-[#f1f2f4FF]"
@@ -32,7 +32,7 @@
             <p class="text-sm text-[#323b49FF] font-medium space-y-2">
               Interview
             </p>
-            <p class="text-2xl font-bold text-green-500">0</p>
+            <p id="total-interview" class="text-2xl font-bold text-green-500">0</p>
           </div>
           <div
             class="bg-white rounded-lg p-3 w-[360px] border border-[#f1f2f4FF]"
@@ -40,41 +40,48 @@
             <p class="text-sm text-[#323b49FF] font-medium space-y-2">
               Rejected
             </p>
-            <p class="text-2xl font-bold text-red-500">0</p>
+            <p id="total-reject" class="text-2xl font-bold text-red-500">0</p>
           </div>
         </div>
         <hr class="border border-[#E6E7E9]" />
       </section>
     </header>
 
-    <main class="max-w-[1110px] mx-auto mt-7 space-y-4">
+    <main id="main-container" class="max-w-[350px] sm:max-w-[1110px] mx-auto mt-7 space-y-4">
       <section>
         <div class="flex justify-between space-y-6">
           <p class="text-xl font-semibold text-[#002C5C]">Available Jobs</p>
-          <p class="text-[#64748bFF] leading-5">0 job</p>
+          <p class="text-[#64748bFF] leading-5"> <span id="available">0</span> job</p>
         </div>
         <div class="flex gap-2">
           <button
-            class="text-sm font-semibold text-white bg-blue-500 border border-[#f1f2f4FF] rounded-sm py-2.5 px-8"
+          id="btn-all"
+          onclick="switchBtn('all')"
+            class="text-sm font-semibold  cursor-pointer  border border-[#f1f2f4FF]  rounded-sm py-2.5 px-8"
           >
             All
           </button>
           <button
-            class="text-sm font-medium text-[#64748B] bg-white border border-[#f1f2f4FF] rounded-sm py-2.5 px-3.5"
+          id="btn-interview"
+          onclick="switchBtn('interview')"
+            class="text-sm font-medium  cursor-pointer text-[#64748b] bg-white border border-[#f1f2f4FF]   rounded-sm py-2.5 px-3.5"
           >
             Interview
           </button>
           <button
-            class="text-sm font-medium text-[#64748B] bg-white border border-[#f1f2f4FF] rounded-sm py-2.5 px-4"
+          id="btn-rejected"
+          onclick="switchBtn('rejected')"
+            class="text-sm font-medium  cursor-pointer text-[#64748b] bg-white border border-[#f1f2f4FF]  rounded-sm py-2.5 px-4"
           >
             Rejected
           </button>
         </div>
       </section>
-      <section class="space-y-5">
+
+      <section id="all-container" class="hidden space-y-5">
         <!-- card 1 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -90,7 +97,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -101,26 +108,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 cursor-pointer px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2 delete cursor-pointer"
+              ><i class="fa-regular fa-trash-can delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 2 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -136,7 +143,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3  rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -147,26 +154,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 cursor-pointer border border-[#10b981FF] uppercase rounded-sm interview"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm cursor-pointer font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border cursor-pointer border-[#f1f2f4FF] rounded-[100%] p-2 delete"
+              ><i class="fa-regular fa-trash-can  delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 3 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -182,7 +189,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -193,26 +200,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase cursor-pointer rounded-sm interview"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm cursor-pointer rejected"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] cursor-pointer p-2 delete"
+              ><i class="fa-regular fa-trash-can delete "></i
+            ></button>
           </div>
         </div>
         <!-- card 4 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -228,7 +235,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -239,26 +246,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected cursor-pointer"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2 delete cursor-pointer "
+              ><i class="fa-regular fa-trash-can delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 5 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -274,7 +281,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -286,26 +293,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected cursor-pointer"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2 delete cursor-pointer"
+              ><i class="fa-regular fa-trash-can delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 6 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -321,7 +328,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -333,26 +340,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected cursor-pointer"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2  delete cursor-pointer"
+              ><i class="fa-regular fa-trash-can delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 7 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -366,7 +373,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -378,26 +385,26 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected cursor-pointer"
               >
                 Rejected
               </button>
             </div>
           </div>
           <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2 delete cursor-pointer"
+              ><i class="fa-regular fa-trash-can delete"></i
+            ></button>
           </div>
         </div>
         <!-- card 8 -->
         <div
-          class="flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+          class=" card flex justify-between bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
         >
           <div class="left-section space-y-5">
             <div class="">
@@ -413,7 +420,7 @@
             </div>
             <div class="">
               <button
-                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm"
+                class="bg-[#eef4ffFF] text-[#002c5cFF] text-sm font-medium py-2 px-3 rounded-sm status uppercase"
               >
                 Not Applied
               </button>
@@ -425,37 +432,44 @@
             </div>
             <div class="flex gap-2">
               <button
-                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#10b981FF] leading-5 py-2 px-3 border border-[#10b981FF] uppercase rounded-sm interview cursor-pointer"
               >
                 interview
               </button>
               <button
-                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm"
+                class="text-sm font-semibold text-[#ef4444FF] leading-5 py-2 px-3.5 border border-[#ef4444FF] uppercase rounded-sm rejected cursor-pointer"
               >
                 Rejected
               </button>
             </div>
           </div>
-          <div class="right-section bg-white">
-            <span class="border border-[#f1f2f4FF] rounded-[100%] p-2"
-              ><i class="fa-regular fa-trash-can"></i
-            ></span>
+          <div class="right-section bg-white ">
+            <button class="border border-[#f1f2f4FF] rounded-[100%] p-2 delete cursor-pointer"
+              ><i class="fa-regular fa-trash-can delete "></i
+            ></button>
           </div>
         </div>
-        <!-- card 9 -->
+      </section>
+
+      <section id="interview-container" class="hidden"></section>
+      <section id="reject-container" class=" hidden"></section>
+
+      <section>
         <div
-          class=" flex justify-center  bg-white border border-[#f1f2f4FF] p-6 rounded-lg"
+        id="empty-section"
+          class=" hidden   bg-white border border-[#f1f2f4FF]   rounded-lg"
         >
         
         <div class="m-28">
           <div class="flex justify-center"><img src="jobs.png" alt=""></div>
           <div class=" text-center">
-            <h2>No jobs available</h2>
-            <p>Check back soon for new job opportunities</p>
+            <h2 class="text-2xl font-semibold text-[#002c5cFF]">No jobs available</h2>
+            <p class="font-normal text-[#64748bFF]">Check back soon for new job opportunities</p>
           </div>
         </div>
         </div>
       </section>
     </main>
+    <script src="./script/script.js"></script>
   </body>
 </html>
